@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ workshop.title }}{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h1 class="fw-bold">{{ workshop.title }}</h1>
+    <p class="text-muted">Led by <strong>{{ workshop.instructor.name }}</strong> ({{ workshop.instructor.specialty }})</p>
+    <p><strong>Date & Time:</strong> {{ workshop.date|date:"F j, Y, g:i a" }}</p>
+    <hr>
+    <h4 class="fw-semibold">Featured Recipes in this Workshop:</h4>
+    <ul>
+        {% for recipe in workshop.recipes.all %}
+            <li><a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a></li>
+        {% empty %}
+            <li class="text-muted">No recipes linked to this workshop.</li>
+        {% endfor %}
+    </ul>
+    <div class="mt-4">
+        <a href="{% url 'workshop_update' workshop.pk %}" class="btn btn-outline-primary btn-sm">Edit</a>
+        <a href="{% url 'workshop_delete' workshop.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+        <a href="{% url 'workshop_list' %}" class="btn btn-secondary btn-sm ms-2">Back to Workshops</a>
+    </div>
+</div>
+{% endblock %}

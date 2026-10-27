@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-1 fw-bold text-danger">404</h1>
+    <p class="fs-3">Oops! The page you are looking for does not exist.</p>
+    <p class="text-muted">It looks like this recipe or workshop was removed or never cooked.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ action }} Recipe{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm p-4">
+            <h2 class="mb-4 fw-bold text-center">{{ action }} Recipe</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <div class="form-text text-muted">{{ field.help_text }}</div>
+                        {% endif %}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success w-100 py-2 mt-2">Save Recipe</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{% url 'recipe_list' %}" class="text-decoration-none">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
